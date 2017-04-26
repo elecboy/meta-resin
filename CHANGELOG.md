@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* Watch for config.json changes and update the VPN config as necessary [Page]
 * Disable coredumps [Jon]
 * Add bind mounts for systemd persistent data [Jon]
 * Update supervisor to v4.2.2 [Page]
