@@ -18,10 +18,10 @@ DESCRIPTION = "Linux container runtime \
  subtle and/or glaring issues. \
  "
 
-SRCREV = "20f81dde9bd97c86b2d0e33bbbf1388018611929"
-SRCBRANCH = "v1.10.3"
+SRCREV = "d2be68c9bf542a57904702d06ceaa0d2c462745c"
+SRCBRANCH = "docker-binaries-consolidation-incremental"
 SRC_URI = "\
-  git://github.com/docker/docker.git;branch=${SRCBRANCH};nobranch=1 \
+  git://github.com/resin-os/docker.git;branch=${SRCBRANCH};nobranch=1 \
   file://docker.service \
   file://var-lib-docker.mount \
   file://docker.conf.systemd \
@@ -47,7 +47,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=aadc30f9c14d876ded7bedc0afd2d3d7"
 
 S = "${WORKDIR}/git"
 
-DOCKER_VERSION = "1.10.3"
+DOCKER_VERSION = "17.03.1-ce"
 PV = "${DOCKER_VERSION}+git${SRCREV}"
 
 DEPENDS = " \
@@ -113,7 +113,7 @@ do_compile() {
   export CGO_LDFLAGS="${LDFLAGS}  ${TARGET_CC_ARCH} --sysroot=${STAGING_DIR_TARGET}"
 
   DOCKER_GITCOMMIT="${SRCREV}" \
-    ./hack/make.sh dynbinary
+    ./hack/make.sh binary-rce
 }
 
 inherit systemd
@@ -123,8 +123,7 @@ SYSTEMD_SERVICE_${PN} = "docker.service var-lib-docker.mount"
 
 do_install() {
   mkdir -p ${D}/${bindir}
-  install -m 0755 ${S}/bundles/${DOCKER_VERSION}/dynbinary/docker-${DOCKER_VERSION} \
-    ${D}/${bindir}/docker
+  install -m 0755 ${S}/bundles/${DOCKER_VERSION}/binary-rce/rce ${D}/${bindir}/rce
 
   install -d ${D}${systemd_unitdir}/system
   install -m 0644 ${S}/contrib/init/systemd/docker.* ${D}/${systemd_unitdir}/system
