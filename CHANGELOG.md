@@ -1,6 +1,7 @@
 Change log
 -----------
 
+* Update Docker to 17.03.1 [Theodor]
 * Explicitly set CONFIG_HIDRAW=y [Michal]
 
 # v2.0.2 - 2017-04-24
