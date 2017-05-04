@@ -1,0 +1,29 @@
+From: Theodor Gherzan <theodor@resin.io>
+Date: Thu, 4 May 2017 17:14:12 +0200
+Subject: [PATCH] Build binary-rce dynamically
+
+Upstream-Status: Pending
+Signed-off-by: Theodor Gherzan <Theodor@resin.io>
+---
+ hack/make/binary-rce | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/hack/make/binary-rce b/hack/make/binary-rce
+index 919f9e4..90128a2 100644
+--- a/hack/make/binary-rce
++++ b/hack/make/binary-rce
+@@ -8,6 +8,10 @@ set -e
+ 	source "${MAKEDIR}/.binary-setup"
+ 	export BINARY_SHORT_NAME="$DOCKER_RCE_BINARY_NAME"
+ 	export GO_PACKAGE='github.com/docker/docker/cmd/rce'
+-	source "${MAKEDIR}/.binary"
++	export IAMSTATIC='false'                                                                                                                                                                              
++	export LDFLAGS_STATIC_DOCKER=''                                                                                                                                                                       
++	export BUILDFLAGS=( "${BUILDFLAGS[@]/netgo /}" ) # disable netgo, since we don't need it for a dynamic binary                                                                                         
++	export BUILDFLAGS=( "${BUILDFLAGS[@]/static_build /}" ) # we're not building a "static" binary 
++	source "${MAKEDIR}/.binary"
+ 	copy_binaries "$DEST" 'hash'
+ )
+-- 
+2.7.4
+

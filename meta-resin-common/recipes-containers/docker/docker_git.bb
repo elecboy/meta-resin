@@ -25,6 +25,7 @@ SRC_URI = "\
   file://docker.service \
   file://var-lib-docker.mount \
   file://docker.conf.systemd \
+  file://0001-Build-binary-rce-dynamically.patch \
   file://0009-graph-aufs-durably-write-layer-on-disk-before-return.patch \
   file://0010-pkg-ioutils-sync-parent-directory-too.patch \
   file://0015-pkg-fadvise-implementation-of-posix_fadvise-2.patch \
