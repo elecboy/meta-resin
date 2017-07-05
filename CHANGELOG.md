@@ -1,6 +1,51 @@
 Change log
 -----------
 
+# v2.0.8 - 2017-07-04
+
+* Resin-vars: Fetch all the vars in resin-vars [Pagan Gazzard]
+* Add comment in supervisor.conf for clarity [Petros Angelatos]
+* Prevent supervisor from killing itself [Pablo Carranza Velez]
+* Store both image and tag in the temporary supervisor.conf [Pablo Carranza Velez]
+* Use current changelog format with versionist [Andrei Gherzan]
+* Update supervisor to v5.1.0 and use aarch64-supervisor for aarch64 [Pablo Carranza Velez]
+* Validate docker config from disk to avoid panicing [Petros Angelatos]
+* Versionist: add support for full versionist use [Gergely Imreh]
+
+# v2.0.7 - 2017-06-28
+
+* Add support for transparent proxy redirection using redsocks [Pablo]
+* Add prerequisites for ipk packages in resinOS images [Andrei]
+* Update supervisor to v5.0.0 [Pablo]
+* Allow downloading a missing supervisor [Will]
+* Add busybox patch to fix tar unpacking [Will]
+* Include support for the RT5572 wireless chipset [Theodor]
+* Add a quirk for /etc/mtab [Will]
+* Switch to resin.io ntp pool [petrosagg]
+* Undefine backwards compatibilty variable, INITRAMFS_TASK [Theodor]
+* Enable CONFIG_KEYS, docker 17 requirment [Theodor]
+* Update NetworkManager to 1.8.0 [Andrei]
+* Update supervisor to v4.3.1 [Andrei]
+* Set NetworkManager connection attempts to infinity [petrosagg]
+* Update Docker to 17.03.1 [Theodor]
+* Include fsck.vfat in resinOS [Andrei]
+
+# v2.0.6 - 2017-06-06
+
+* Update supervisor to v4.2.4 [Pablo]
+
+# v2.0.5 - 2017-06-02
+
+* Fix dependencies for mount service in /var/lib [Andrei]
+* Various build fixes when using other package formats like ipk [Andrei]
+* Define IMAGE_NAME_SUFFIX, needed for resinhup, for Yocto versions older than Morty [Florin]
+* Add support for modifying the regulatory domain for wifi interfaces [Michal]
+* Add support for qmi and mbim cell modems [Joshua]
+* Disable all password logins on production images, rather than just root logins - this gets rid of the password prompt dialog that users have seen. [Page]
+
+# v2.0.4 - 2017-05-16
+
+* Enable the resin-uboot implementation to also boot flasher images from USB media [Florin]
 * Use supervisor tag as supervisor recipe PV [Andrei}
 
 # v2.0.3 - 2017-05-10

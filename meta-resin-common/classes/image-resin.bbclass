@@ -191,6 +191,7 @@ QUIRK_FILES ?= " \
     etc/hostname \
     etc/hosts \
     etc/resolv.conf \
+    etc/mtab \
     "
 resin_root_quirks () {
     # Quirks
@@ -199,11 +200,11 @@ resin_root_quirks () {
     # Make sure you run this before packing
     if [ "${QUIRK_FILES}" != "" ];then
         for file in ${QUIRK_FILES}; do
-            src=${IMAGE_ROOTFS}/$file
-            dst=${IMAGE_ROOTFS}/quirks/$file
-            if [ -f $src ]; then
-                mkdir -p $(dirname $dst)
-                cp $src $dst
+            src="${IMAGE_ROOTFS}/$file"
+            dst="${IMAGE_ROOTFS}/quirks/$file"
+            if [ -f "$src" ] || [ -L "$src" ]; then
+                mkdir -p $(dirname "$dst")
+                cp -d "$src" "$dst"
             else
                 bbfatal "Quirks: $src doesn't exist."
             fi
@@ -218,6 +219,7 @@ resinhup_backwards_compatible_link () {
         DEPLOY_IMAGE_TAR="${IMGDEPLOYDIR}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.tar"
         RESIN_HUP_BUNDLE="${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.resinhup-tar"
     else
+        IMAGE_NAME_SUFFIX=".rootfs"
         DEPLOY_IMAGE_TAR="${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.tar"
         RESIN_HUP_BUNDLE="${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.resinhup-tar"
     fi

@@ -78,6 +78,9 @@ RESIN_CONFIGS ?= " \
     xtables \
     audit \
     governor \
+    mbim \
+    qmi \
+    misc \
     "
 
 #
@@ -131,6 +134,7 @@ RESIN_CONFIGS[docker] ?= " \
     CONFIG_EXT4_FS_SECURITY=y \
     CONFIG_AUFS_FS=y \
     CONFIG_AUFS_XATTR=y \
+    CONFIG_KEYS=y \
     "
 
 #
@@ -193,7 +197,7 @@ RESIN_CONFIGS[r8188eu] ?= "\
     "
 
 # rt53xx wireless chipset family to the rt2800usb driver.
-# Supported chips: RT5370
+# Supported chips: RT5370 RT5572
 RESIN_CONFIGS_DEPS[ralink] ?= "\
     CONFIG_CFG80211=m \
     CONFIG_MAC80211=m \
@@ -202,6 +206,7 @@ RESIN_CONFIGS_DEPS[ralink] ?= "\
     "
 RESIN_CONFIGS[ralink] ?= "\
     CONFIG_RT2800USB_RT53XX=y \
+    CONFIG_RT2800USB_RT55XX=y \
     "
 
 #
@@ -328,6 +333,21 @@ RESIN_CONFIGS[audit] = " \
 
 RESIN_CONFIGS_DEPS[governor] ?= " \
     CONFIG_CPU_FREQ_DEFAULT_GOV_ONDEMAND=y \
+    "
+
+# support for mbim cell modems
+RESIN_CONFIGS[mbim] = " \
+    CONFIG_USB_NET_CDC_MBIM=m \
+    "
+
+# support for qmi cell modems
+RESIN_CONFIGS[qmi] = " \
+    CONFIG_USB_NET_QMI_WWAN=m \
+    "
+
+# various other configurations
+RESIN_CONFIGS[misc] = " \
+    CONFIG_NF_NAT_REDIRECT=m \
     "
 
 ###########
